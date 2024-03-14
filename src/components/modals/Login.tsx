@@ -1,13 +1,18 @@
+import { AuthModalState } from '@/atoms/authModalAtom';
 import React from 'react';
+import { useSetRecoilState } from 'recoil';
 
-type LoginProps = {
-    
-};
+type LoginProps = {};
 
 const Login:React.FC<LoginProps> = () => {
+    const setAuthModalState = useSetRecoilState(AuthModalState)
+    const manageClick = (type: "login" | "register" | "forgotPassword") => {
+        setAuthModalState((prev) => ({ ...prev, type}));
+    }
+    return (
+    <form action="#" className='space-y-6 px-6 py-4'>
+        <h3 className='text-xl font-medium text-white'>Ingresa a Bambucod.</h3>
     
-    return <form action="#" className='space-y-6 px-6 py-4'>
-        <h3 className='text-xl font-medium text-white'>Registrate en Bambucod.</h3>
         <div>
             <label htmlFor="email" className='text-sm font-medium block mb-2 text-gray-300 '>
                 Ingresa tu email  
@@ -39,17 +44,18 @@ const Login:React.FC<LoginProps> = () => {
         text-sm px-5 py-2.5 text-center bg-light-blue hover:bg-dark-blue'>
             Login
         </button>
-        <button className='flex w-full justify-end'>
+        <button className='flex w-full justify-end' onClick={() => manageClick("forgotPassword")}>
             <a href="#" className='text-sm block text-brand-orange hover:underline w-full text-right'>
                 ¿Olvido el Password?
             </a>
         </button>
         <div className='text-sm font-medium text-gray-500'>
             ¿No está registrado? {"     "}
-            <a href="#" className='text-blue-700 hover:underline'>
+            <a href="#" className='text-blue-700 hover:underline' onClick={() => manageClick("register")}>
                 Crear cuenta
             </a>
         </div>
     </form>
+    );
 }
 export default Login;
