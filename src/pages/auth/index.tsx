@@ -9,7 +9,7 @@ type AuthPageProps = { };
 
 const AuthPage:React.FC<AuthPageProps> = () => {
     const authModal = useRecoilValue(AuthModalState)
-    return <div className='bg-light-white h-screen relative'>
+    return <div className='bg-background-blue h-screen relative'>
                         <div className='max-w-7xl mx-auto'>
                             <Navbar/>
                             <div className="slogan bg-light-blue py-0  rounded text-white h-80 opacity-20"> 
