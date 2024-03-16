@@ -20,7 +20,7 @@ const Navbar:React.FC<NavbarProps> = () => {
                 hover:text-dark-blue hover:bg-white hover:border-2  hover:border-dark-blue border-2 transition duration-300 ease-in-out'
                 onClick={manageClick}
                 >
-                    Sign In
+                    Iniciar Sesion
                 </button>
             </div>
     </div>
