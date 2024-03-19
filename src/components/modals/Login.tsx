@@ -5,6 +5,11 @@ import { useSetRecoilState } from 'recoil';
 type LoginProps = {};
 
 const Login:React.FC<LoginProps> = () => {
+    //Url del backend para autenticacion
+    const USER_API_AUTH_URL = 'http://localhost:8081/api/v1/auth';
+    // definir hooks para fetch la data y guardar la data en el estado
+    
+
     const setAuthModalState = useSetRecoilState(AuthModalState)
     const manageClick = (type: "login" | "register" | "forgotPassword") => {
         setAuthModalState((prev) => ({ ...prev, type}));
