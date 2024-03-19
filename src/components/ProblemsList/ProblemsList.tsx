@@ -13,14 +13,14 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
         <tbody className='text-white'>
             {problems.map((problem, index) => {
                 const difficulyColor = 
-                problem.difficulty === "Easy"
+                problem.difficulty === "Fácil"
                 ? "text-dark-green-s"
-                : problem.difficulty === "Medium"
+                : problem.difficulty === "Intermedio"
                 ? "text-dark-yellow"
                 : "text-dark-pink";
 
                 return(
-                    <tr className={` ${index % 2 == 1 ? "bg-light-blue" : ""}`} key={problem.id}>
+                    <tr className={` ${index % 2 == 1 ? "bg-dark-fill-3" : ""}`} key={problem.id}>
                         <th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
                                 <BsCheckCircle fontSize={"18"} width='18'/>
 
@@ -35,6 +35,9 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
                         </td>
                         <td className={`px-6 py-4`}>
                             {problem.category}
+                        </td>
+                        <td className={`px-6 py-4`}>
+                            {problem.hint}
                         </td>
                     </tr>
 

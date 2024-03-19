@@ -32,6 +32,7 @@ module.exports = {
         "dark-blue": "rgb(5,0,54)",
         "light-white": "rgb(245,250,252)",
 		"background-blue": "rgb(6,20,54)",
+		"problems-blue": "rgb(31,41,55)",
 
 			},
 		    fontFamily: {

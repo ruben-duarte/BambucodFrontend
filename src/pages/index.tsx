@@ -1,6 +1,6 @@
 import Problemtop from "@/components/Problemtop/Problemtop";
 import Head from "next/head";
-import ProblemsList from "@/components/ProblemsList/problemsList";
+import ProblemsList from "@/components/ProblemsList/ProblemsList";
 
 export default function Home() {
   return (
