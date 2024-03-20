@@ -62,7 +62,7 @@ const SignUp:React.FC<SignUpProps> = () => {
             Registrate
         </button>
 
-        <div className='text-sm font-medium text-gray-500'>
+        <div className='text-sm font-medium text-gray-500 text-center'>
             ¿Ya tienes una cuenta? {"     "}
             <a href="#" className='text-blue-700 hover:underline' onClick={manageClick}>
                 Iniciar sesión

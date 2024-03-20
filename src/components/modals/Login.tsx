@@ -45,10 +45,10 @@ const Login:React.FC<LoginProps> = () => {
         </button>
         <button className='flex w-full justify-end' onClick={() => manageClick("forgotPassword")}>
             <a href="#" className='text-sm block text-brand-orange hover:underline w-full text-right'>
-                ¿Olvido el Password?
+                ¿Olvido la contraseña?
             </a>
         </button>
-        <div className='text-sm font-medium text-gray-500'>
+        <div className='text-sm font-medium text-gray-500 text-center'>
             ¿No está registrado? {"     "}
             <a href="#" className='text-blue-700 hover:underline' onClick={() => manageClick("register")}>
                 Crear cuenta

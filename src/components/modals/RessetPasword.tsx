@@ -6,7 +6,7 @@ const RessetPasword:React.FC<RessetPaswordProps> = () => {
     
     return (
         <form className='space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8' >
-        <h3 className='text-xl font-medium  text-white'>Reiniciar Contraseña</h3>
+        <h3 className='text-xl font-medium  text-white'>Cambia tu contraseña</h3>
         <p className='text-sm text-white '>
             ¿Has olvidado tu contraseña? ingrese su email  abajo  y le enviaremos un email para reiniciar su contraseña.
         </p>
@@ -28,7 +28,7 @@ const RessetPasword:React.FC<RessetPaswordProps> = () => {
             className={`w-full text-white  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
             bg-light-blue hover:bg-brand-orange-s `}
         >
-            Reset Password
+            Reiniciar contraseña
         </button>
     </form>
     );
