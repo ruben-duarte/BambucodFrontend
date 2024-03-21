@@ -33,5 +33,11 @@ export default NextAuth({
         },
       }),
     ],
-    // ...otros ajustes de NextAuth.js
+    callbacks: {
+        async redirect({ url, baseUrl }) {
+          // Siempre redirige al usuario a la página especificada después del inicio de sesión
+          return baseUrl + '/auth';
+        },
+        // ...otros callbacks
+      },
   });

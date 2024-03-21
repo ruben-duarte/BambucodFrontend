@@ -12,9 +12,6 @@ const Navbar:React.FC<NavbarProps> = () => {
         setAuthModalState((prev) => ({ ...prev, isopen: true}));
     }
 
-    const signInLo = () => {
-        console.log(`Mi variable nextauth: ${ process.env.NEXT_PUBLIC_NEXTAUTH_URL}`);
-    }
     return <div className='flex items-center justify-between sm:px-12 md:px-24 relative z-10'>
             <Link href="/" className='flex items-center justify-center h-20'>
                 <img src="/bambucodeLogo.jpg" alt="logo" className='w-24'/>

@@ -2,6 +2,7 @@ import { AuthModalState } from '@/atoms/authModalAtom';
 import React, { FormEventHandler } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { signIn } from 'next-auth/react';
+import { TbRuler } from 'react-icons/tb';
 
 type LoginProps = {};
 
@@ -22,7 +23,7 @@ const Login:React.FC<LoginProps> = () => {
         const res = await signIn('credentials', {
             username: target.username.value,
             password: target.password.value,
-            redirect: false
+            redirect: true
         })
         console.log(res);
     }
