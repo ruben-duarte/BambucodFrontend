@@ -25,8 +25,7 @@ export default NextAuth({
           
           if (res.ok && response) {
             console.log(response);
-            return response; // Si la autenticación es exitosa, NextAuth creará una sesión
-            
+            return { ...credentials, token: response.message };
           } else{
             throw new Error('Autenticación fallida'); // Si la autenticación falla, lanzar un error
           }
@@ -34,6 +33,14 @@ export default NextAuth({
       }),
     ],
     callbacks: {
+        jwt: async ({ token, user }) => {
+            // Si el usuario se acaba de autenticar, tomar el token del objeto 'user'
+            if (user) {
+              token.accessToken = user.token;
+              
+            }
+            return token;
+          },          
         async redirect({ url, baseUrl }) {
           // Siempre redirige al usuario a la página especificada después del inicio de sesión
           return baseUrl + '/auth';
