@@ -1,5 +1,5 @@
 
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 import CredentialsProviders from 'next-auth/providers/credentials';
 
 const USER_API_AUTH_URL = 'http://localhost:8081/api/v1/auth'
@@ -41,10 +41,15 @@ export default NextAuth({
             }
             return token;
           },          
+        session: async ({ session, token }) => {
+          session.accessToken = token.accessToken;
+          return session;
+        },
         async redirect({ url, baseUrl }) {
           // Siempre redirige al usuario a la página especificada después del inicio de sesión
           return baseUrl + '/auth';
         },
-        // ...otros callbacks
+        
+        
       },
   });

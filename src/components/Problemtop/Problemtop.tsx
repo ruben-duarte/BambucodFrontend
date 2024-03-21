@@ -25,8 +25,8 @@ const Problemtop:React.FC<ProblemtopProps> = () => {
                     Quiero apoyar Bambucod 🎵
                 </a>
             </div>
-            <Link href='/auth'>
-                <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Iniciar Sesion</button>
+            <Link href='/'>
+                <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Inicio</button>
             </Link>
         </div>
     </div>
