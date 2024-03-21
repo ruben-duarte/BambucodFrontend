@@ -15,7 +15,7 @@ type ProblemsListProps = {
 const ProblemsList:React.FC<ProblemsListProps> = () => {
     const [problems, setProblems] = useState([]);
     useEffect(() => {
-       
+       console.log("hola");
         const fetchGet = async () => {
             const res = await fetch(`${USER_API_AUTH_URL}/list`, {
                 method: 'GET',
