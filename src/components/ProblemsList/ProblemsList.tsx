@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from "react";
 
 
-const USER_API_AUTH_URL = 'http://localhost:8081/api/v1/puzzle';
+const BASE_URL = 'http://localhost:8081/api/v1/puzzle';
 
 
 type ProblemsListProps = {
@@ -15,9 +15,8 @@ type ProblemsListProps = {
 const ProblemsList:React.FC<ProblemsListProps> = () => {
     const [problems, setProblems] = useState([]);
     useEffect(() => {
-       console.log("hola");
         const fetchGet = async () => {
-            const res = await fetch(`${USER_API_AUTH_URL}/list`, {
+            const res = await fetch(`${BASE_URL}/list`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

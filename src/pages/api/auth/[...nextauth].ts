@@ -23,11 +23,11 @@ export default NextAuth({
           });
           const response = await res.json();
           
-          if (res.ok && response) {
+          if (res.ok) {
             console.log(response);
             return { ...credentials, token: response.message };
           } else{
-            throw new Error('Autenticación fallida'); // Si la autenticación falla, lanzar un error
+            throw new Error(response.message); // Si la autenticación falla, lanzar un error
           }
         },
       }),

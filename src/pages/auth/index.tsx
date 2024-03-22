@@ -2,6 +2,7 @@ import Problemtop from "@/components/Problemtop/Problemtop";
 import ProblemsList from "@/components/ProblemsList/ProblemsList";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 
 
@@ -16,6 +17,7 @@ export default function Home() {
     }
   }, [session, status]);
 
+  
   return (
       <>
         <main className="bg-background-blue min-h-screen">
@@ -47,6 +49,7 @@ export default function Home() {
                     </th>
                   </tr>
                 </thead>
+                
                 <ProblemsList/>
               </table>
               </div>

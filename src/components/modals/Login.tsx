@@ -3,14 +3,22 @@ import React, { FormEventHandler } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { signIn } from 'next-auth/react';
 import { TbRuler } from 'react-icons/tb';
+import Swal from "sweetalert2";
+import { truncate } from 'fs';
+import { redirect } from 'next/navigation';
+
 
 type LoginProps = {};
+
+
 
 const Login:React.FC<LoginProps> = () => {
     const setAuthModalState = useSetRecoilState(AuthModalState)
     const manageClick = (type: "login" | "register" | "forgotPassword") => {
         setAuthModalState((prev) => ({ ...prev, type}));
     }
+
+   
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
@@ -23,9 +31,18 @@ const Login:React.FC<LoginProps> = () => {
         const res = await signIn('credentials', {
             username: target.username.value,
             password: target.password.value,
-            redirect: true
-        })
-        console.log(res);
+            redirect: false
+        });
+        
+        if(res?.ok ){
+            window.location.href='/auth';
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: `${ res?.error }`
+            });
+        }
     }
 
     return (
@@ -71,4 +88,6 @@ const Login:React.FC<LoginProps> = () => {
     </form>
     );
 }
+
+
 export default Login;
