@@ -1,21 +1,52 @@
 import { AuthModalState } from '@/atoms/authModalAtom';
-import React from 'react';
+import React, { FormEventHandler } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { signIn } from 'next-auth/react';
+import { TbRuler } from 'react-icons/tb';
+import Swal from "sweetalert2";
+import { truncate } from 'fs';
+import { redirect } from 'next/navigation';
+
 
 type LoginProps = {};
 
-const Login:React.FC<LoginProps> = () => {
-    //Url del backend para autenticacion
-    const USER_API_AUTH_URL = 'http://localhost:8081/api/v1/auth';
-    // definir hooks para fetch la data y guardar la data en el estado
-    
 
+
+const Login:React.FC<LoginProps> = () => {
     const setAuthModalState = useSetRecoilState(AuthModalState)
     const manageClick = (type: "login" | "register" | "forgotPassword") => {
         setAuthModalState((prev) => ({ ...prev, type}));
     }
+
+   
+
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+        event.preventDefault();
+        
+        const target = event.target as typeof event.target & {
+            username: { value: string },
+            password: { value: string }
+        }
+
+        const res = await signIn('credentials', {
+            username: target.username.value,
+            password: target.password.value,
+            redirect: false
+        });
+        
+        if(res?.ok ){
+            window.location.href='/auth';
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: `${ res?.error }`
+            });
+        }
+    }
+
     return (
-    <form action="#" className='space-y-6 px-6 py-4'>
+    <form action="#" onSubmit={handleSubmit} className='space-y-6 px-6 py-4'>
         <h3 className='text-xl font-medium text-white'>Ingresa a Bambucod.</h3>
     
         <div>
@@ -23,7 +54,7 @@ const Login:React.FC<LoginProps> = () => {
                 Ingresa tu email  
             </label>
 
-            <input type="email" name='email' id='email' className='
+            <input type="email" name='username' id='email' className='
             border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-blue-600
             border-gray-500 placeholder-gray-400 text-white 
             ' placeholder='texto@company.com'
@@ -57,4 +88,6 @@ const Login:React.FC<LoginProps> = () => {
     </form>
     );
 }
+
+
 export default Login;

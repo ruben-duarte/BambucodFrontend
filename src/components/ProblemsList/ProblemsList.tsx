@@ -2,20 +2,47 @@ import React from 'react';
 import { problems } from '../problems/problems';
 import { BsCheckCircle } from 'react-icons/bs';
 import Link from 'next/link';
+import { useEffect, useState } from "react";
+
+
+const BASE_URL = 'http://localhost:8081/api/v1/puzzle';
+
 
 type ProblemsListProps = {
     
 };
 
 const ProblemsList:React.FC<ProblemsListProps> = () => {
-    
+    const [problems, setProblems] = useState([]);
+    useEffect(() => {
+        const fetchGet = async () => {
+            const res = await fetch(`${BASE_URL}/list`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const response = await res.json();
+            if (res.ok) {
+                
+                setProblems(response);
+            } else {
+                console.log("ERROR INTENTE DE NUEVO");
+            }
+        };
+        fetchGet();
+      },[]);
+
+      
+
+
     return (
         <tbody className='text-white'>
             {problems.map((problem, index) => {
                 const difficulyColor = 
-                problem.difficulty === "Fácil"
+                problem.difficulty === "Easy"
                 ? "text-dark-green-s"
-                : problem.difficulty === "Intermedio"
+                : problem.difficulty === "Medium"
                 ? "text-dark-yellow"
                 : "text-dark-pink";
 

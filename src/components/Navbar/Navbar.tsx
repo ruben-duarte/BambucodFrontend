@@ -1,4 +1,5 @@
 import { AuthModalState } from '@/atoms/authModalAtom';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -10,6 +11,7 @@ const Navbar:React.FC<NavbarProps> = () => {
     const manageClick = () => {
         setAuthModalState((prev) => ({ ...prev, isopen: true}));
     }
+
     return <div className='flex items-center justify-between sm:px-12 md:px-24 relative z-10'>
             <Link href="/" className='flex items-center justify-center h-20'>
                 <img src="/bambucodeLogo.jpg" alt="logo" className='w-24'/>
