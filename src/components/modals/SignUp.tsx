@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MdOutlineDriveFileRenameOutline } from "react-icons/md";
 import { useSetRecoilState } from 'recoil';
 import { AuthModalState } from '@/atoms/authModalAtom';
+import Swal from 'sweetalert2';
 
 type SignUpProps = {};
 
@@ -43,13 +44,24 @@ const SignUp:React.FC<SignUpProps> = () => {
             },
             body: JSON.stringify(registerData),
           });
+          
+          const jsonResponse = await response.json();
+
+          if (response.ok) {
+            Swal.fire({
+              title: "Registro exitoso",
+              text: `${jsonResponse.message}`,
+              icon: "success"
+            })
+          }else {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: `${jsonResponse .error }`
+          })
+        }
+          
     
-          if (!response.ok) {
-            throw new Error('Failed to create user');
-          }
-    
-          const data = await response.json();
-          console.log(data); // Handle response from backend
         } catch (error) {
           console.error('Error creating user:', error);
         }
