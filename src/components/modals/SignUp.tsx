@@ -13,10 +13,10 @@ const SignUp:React.FC<SignUpProps> = () => {
     }
 
     const [registerData, setRegisterData] = useState({
-        username : ' ',
-        name: ' ',
-        lastName: ' ',
-        password: ' ',
+        username : '',
+        name: '',
+        lastName: '',
+        password: '',
     })
 
     // const handleSubmit = (event) => {
@@ -25,7 +25,8 @@ const SignUp:React.FC<SignUpProps> = () => {
     // };
 
     const handleChange = (e) => {
-        setRegisterData( {
+
+      setRegisterData( {
           ...registerData,
           [e.target.name]: e.target.value,
         });
@@ -57,7 +58,7 @@ const SignUp:React.FC<SignUpProps> = () => {
             Swal.fire({
               icon: "error",
               title: "Error",
-              text: `${jsonResponse .error }`
+              text: `${jsonResponse .message }`
           })
         }
           
