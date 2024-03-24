@@ -40,9 +40,9 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
         <tbody className='text-white'>
             {problems.map((problem, index) => {
                 const difficulyColor = 
-                problem.difficulty === "Easy"
+                problem.difficulty === "Fácil"
                 ? "text-dark-green-s"
-                : problem.difficulty === "Medium"
+                : problem.difficulty === "Intermedio"
                 ? "text-dark-yellow"
                 : "text-dark-pink";
 

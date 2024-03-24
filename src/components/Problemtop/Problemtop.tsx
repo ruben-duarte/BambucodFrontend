@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+import Logout from '../ButtonLogout/Logout';
 
 type ProblemtopProps = {
     
@@ -8,7 +9,7 @@ type ProblemtopProps = {
 
 const Problemtop:React.FC<ProblemtopProps> = () => {
     
-    return <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-light-blue  text-light-blue-7 text-white border-1'>
+    return <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-light-blue text-light-blue-7 text-white border-1'>
     <div className={`flex w-full items-center justify-between max-w-[1200px] mx-auto`}>
         <Link href='/' className='h-[22px] flex-1'>
             <Image src='/bambucodeLogo.jpg' alt='Logo' height={150} width={120} className='rounded' />
@@ -28,6 +29,7 @@ const Problemtop:React.FC<ProblemtopProps> = () => {
             <Link href='/'>
                 <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Inicio</button>
             </Link>
+            <Logout/>
         </div>
     </div>
 </nav>
