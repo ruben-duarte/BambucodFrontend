@@ -4,6 +4,7 @@ import Split from 'react-split';
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
+import EditorButtons from './EditorButtons';
 
 type PlaycodeProps = {
     
@@ -74,9 +75,9 @@ const Playcode:React.FC<PlaycodeProps> = () => {
                         </div>
 
                     </div>
-
 				</div>
         </Split>
+        <EditorButtons/>
     </div>
     );
 }
