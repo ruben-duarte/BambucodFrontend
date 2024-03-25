@@ -1,25 +1,77 @@
-import React from 'react';
+import  { useState } from 'react';
 import PreferenceNavbar from './PreferenceNavbar/PreferenceNavbar';
 import Split from 'react-split';
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import EditorButtons from './EditorButtons';
+import { problems } from '@/utils/problems';
+import { useRouter } from 'next/router';
+import { Problem } from "@/utils/types/problem";
+import Swal from "sweetalert2";
 
 type PlaycodeProps = {
-    
+    problem: Problem;
+    setSuccess : React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Playcode:React.FC<PlaycodeProps> = () => {
-    
+const Playcode:React.FC<PlaycodeProps> = ({ problem, setSuccess }) => {
+    const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+    const [userCode, setUserCode ] = useState<string>(problem.starterCode);
+    const { query : { problemid } }= useRouter(); 
+        
+    const handleSubmit = async () => {
+      //  alert(problem);
+        try {
+            const callb = new Function(`return ${userCode}`)();
+            const success = problems[problemid as string].handlerFunction(callb);
+            if(success) {
+                Swal.fire({
+                    title: "Muy bien!",
+                    text: "Pasaste todos los casos de prueba!",
+                    icon: "success"
+                  });
+                  setSuccess(true);
+                  setTimeout(() =>{
+                    setSuccess(false);
+                  },5000)
+            }
+
+        } catch (error:any) {
+            if(error.message.startsWith("Error: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:")){                      
+                    Swal.fire({
+                    icon: "error",
+                    title: "Intentalo de nuevo",
+                    text: "No pasaste todos los casos de prueba!",
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops... tienes un error",
+                    text: "No pasaste todos los casos de prueba!",
+                    footer: '<a href="#">Why do I have this issue?</a>'
+                    });
+            }
+        }
+    };
+
+    const onChange = (value:string) => {
+       // console.log(value);
+        //console.log(problem);
+        setUserCode(value);
+    }; 
+
+
     return (
     <div className='flex flex-col  bg-dark-layer-1  relative'>
         <PreferenceNavbar/>
         <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60,40]} minSize={60}>
             <div className='w-full overflow-auto'>
                 <CodeMirror
-                    value='const temperature = 27;'
+                    value={problem.starterCode}
                     theme={vscodeDark}
+                    onChange={onChange}
                     extensions={[javascript()]}
                     style={{fontSize: 14}}
                 />
@@ -35,29 +87,17 @@ const Playcode:React.FC<PlaycodeProps> = () => {
 
                     <div className="flex">
 
-                        <div className="mr-2 items-start  mt-2 text-white">
-                            <div className='flex flex-wrap items-center gap-y-4'>
-                                <div className='font-medium items-center transition-all focus:outline-none inline-flex bg-dark-fill-3 hover:bg-dark-fill-2 rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap'>
-                                    caso 1
-                                </div>
+                    {problem.examples.map((example, index) => (
+                        <div className="mr-2 items-start  mt-2 text-white" key={example.id} 
+                        onClick={() => setActiveTestCaseId(index)}>
+                        <div className='flex flex-wrap items-center gap-y-4'>
+                            <div className='font-medium items-center transition-all focus:outline-none inline-flex bg-dark-fill-3 hover:bg-dark-fill-2 rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap'>
+                                caso {index + 1}
                             </div>
                         </div>
-                        
-                        <div className="mr-2 items-start  mt-2 text-white">
-                            <div className='flex flex-wrap items-center gap-y-4'>
-                                <div className='font-medium items-center transition-all focus:outline-none inline-flex bg-dark-fill-3 hover:bg-dark-fill-2 rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap'>
-                                    caso 2
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+						))}
 
-                        <div className="mr-2 items-start  mt-2 text-white">
-                            <div className='flex flex-wrap items-center gap-y-4'>
-                                <div className='font-medium items-center transition-all focus:outline-none inline-flex bg-dark-fill-3 hover:bg-dark-fill-2 rounded-lg px-4 py-1 cursor-pointer whitespace-nowrap'>
-                                    caso 3
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div className="font-semibold">
@@ -65,19 +105,19 @@ const Playcode:React.FC<PlaycodeProps> = () => {
                             Entrada: 
                         </p>
                         <div className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2'>
-                            nums : [2,4,7,8,9,10], targets : 9
+                            {problem.examples[activeTestCaseId].inputText}
                         </div>
                         <p className="text-sm font-medium mt-4 text-white ">
                             Salida: 
                         </p>
                         <div className='w-full cursor-text rounded-lg border px-3 py-[10px] bg-dark-fill-3 border-transparent text-white mt-2'>
-                            [0,1] 
+                            {problem.examples[activeTestCaseId].outputText}
                         </div>
 
                     </div>
 				</div>
         </Split>
-        <EditorButtons/>
+        <EditorButtons handleSubmit={handleSubmit}/>
     </div>
     );
 }
