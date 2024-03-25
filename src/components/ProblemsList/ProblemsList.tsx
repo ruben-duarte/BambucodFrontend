@@ -3,9 +3,7 @@ import { problems } from '../problems/problems';
 import { BsCheckCircle } from 'react-icons/bs';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
-
-
-const BASE_URL = 'http://localhost:8081/api/v1/puzzle';
+import { useSession } from 'next-auth/react';
 
 
 type ProblemsListProps = {
@@ -13,10 +11,18 @@ type ProblemsListProps = {
 };
 
 const ProblemsList:React.FC<ProblemsListProps> = () => {
+    const { data:session, status } = useSession();
+
     const [problems, setProblems] = useState([]);
+    
     useEffect(() => {
+        if(status === "authenticated"){
+            console.log("esta loggueado");
+        } else {
+            console.log("no esta logg");
+        }
         const fetchGet = async () => {
-            const res = await fetch(`${BASE_URL}/list`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/puzzle/list`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -24,16 +30,19 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
             });
             const response = await res.json();
             if (res.ok) {
-                
                 setProblems(response);
             } else {
                 console.log("ERROR INTENTE DE NUEVO");
             }
         };
         fetchGet();
+        
       },[]);
 
-      
+      const redirectAuth = () => {
+        event.preventDefault()
+        console.log("click");
+      }
 
 
     return (
@@ -53,8 +62,8 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
 
                         </th>
                         <td className='px-6 py-4'>
-                            <Link className="hover:text-blue-600 cursor-pointer" href={`/problems/${problem.id}`}>
-                                {problem.title}
+                            <Link href={`/problems/${problem.id}`} className="hover:text-blue-600 cursor-pointer">
+                                {problem.title}                                
                             </Link>
                         </td>
                         <td className={`px-6 py-4 ${difficulyColor}`}>
