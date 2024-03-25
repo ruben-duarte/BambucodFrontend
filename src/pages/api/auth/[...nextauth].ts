@@ -1,20 +1,14 @@
-
 import NextAuth from 'next-auth';
 import CredentialsProviders from 'next-auth/providers/credentials';
 
-const USER_API_AUTH_URL = 'http://localhost:8081/api/v1/auth'
 
 export default NextAuth({
     providers: [
         CredentialsProviders({
-        // El nombre que aparecerá en la interfaz de NextAuth
         name: 'Credentials',
-        credentials: {
-          // No necesitas definir las credenciales aquí si estás capturándolas desde un formulario
-        },
+        credentials: {},
         authorize: async (credentials) => {
-          // Aquí debes crear una solicitud a tu API de backend de Spring Boot
-          const res = await fetch(`${ USER_API_AUTH_URL }/login`, {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -27,11 +21,14 @@ export default NextAuth({
             console.log(response);
             return { ...credentials, token: response.message };
           } else{
-            throw new Error(response.message); // Si la autenticación falla, lanzar un error
+            throw new Error(response.message); 
           }
         },
       }),
     ],
+    pages:{
+      signIn: '/'
+    },
     callbacks: {
         jwt: async ({ token, user }) => {
             // Si el usuario se acaba de autenticar, tomar el token del objeto 'user'
@@ -46,10 +43,7 @@ export default NextAuth({
           return session;
         },
         async redirect({ url, baseUrl }) {
-          // Siempre redirige al usuario a la página especificada después del inicio de sesión
           return baseUrl + '/auth';
         },
-        
-        
       },
   });

@@ -19,11 +19,6 @@ const SignUp:React.FC<SignUpProps> = () => {
         password: '',
     })
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log(event.target.name.value);
-    // };
-
     const handleChange = (e) => {
 
       setRegisterData( {
@@ -32,13 +27,13 @@ const SignUp:React.FC<SignUpProps> = () => {
         });
       };
 
-  const BASE_URL = 'http://localhost:8081/api/v1/auth';
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(registerData)
 
         try {
-          const response = await fetch(`${BASE_URL}/register`, {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
