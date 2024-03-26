@@ -18,8 +18,8 @@ export default NextAuth({
           const response = await res.json();
           
           if (res.ok) {
-            console.log(response);
-            return { ...credentials, token: response.message };
+            
+            return { ...credentials, token: response.message, email: response.email};
           } else{
             throw new Error(response.message); 
           }
@@ -34,12 +34,14 @@ export default NextAuth({
             // Si el usuario se acaba de autenticar, tomar el token del objeto 'user'
             if (user) {
               token.accessToken = user.token;
-              
+              token.email = user.email
             }
+            
             return token;
           },          
         session: async ({ session, token }) => {
           session.accessToken = token.accessToken;
+          
           return session;
         },
         async redirect({ url, baseUrl }) {

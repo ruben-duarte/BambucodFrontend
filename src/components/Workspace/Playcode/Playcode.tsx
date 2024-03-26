@@ -9,6 +9,8 @@ import { problems } from '@/utils/problems';
 import { useRouter } from 'next/router';
 import { Problem } from "@/utils/types/problem";
 import Swal from "sweetalert2";
+import { useSession } from 'next-auth/react';
+import { useScore } from '@/context/ScoreContext';
 
 type PlaycodeProps = {
     problem: Problem;
@@ -19,13 +21,44 @@ const Playcode:React.FC<PlaycodeProps> = ({ problem, setSuccess }) => {
     const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
     const [userCode, setUserCode ] = useState<string>(problem.starterCode);
     const { query : { problemid } }= useRouter(); 
+    const { data:session, status } = useSession();
+    const { score, setScore } = useScore();
+    
+
+    const scoreValue = 500;
+    const token = session?.accessToken;
+    const emailUser = session?.user?.email;
+    
+    const apiUpdateScore = async () => {
         
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/set-score/${emailUser}`, {
+            method: "PATCH",
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({ "score": scoreValue }),
+          });
+          const response = await res.json();
+    
+          if (res.ok) {
+            setScore(response);
+            return response;
+          } else{
+            throw new Error(response.message); 
+          }
+
+          
+      }
+
     const handleSubmit = async () => {
       //  alert(problem);
         try {
             const callb = new Function(`return ${userCode}`)();
             const success = problems[problemid as string].handlerFunction(callb);
             if(success) {
+                const result = await apiUpdateScore();
+                console.log(result);
                 Swal.fire({
                     title: "Muy bien!",
                     text: "Pasaste todos los casos de prueba!",
@@ -38,19 +71,17 @@ const Playcode:React.FC<PlaycodeProps> = ({ problem, setSuccess }) => {
             }
 
         } catch (error:any) {
-            if(error.message.startsWith("Error: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:")){                      
+            if(error.message.startsWith("Error: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:")){ 
                     Swal.fire({
                     icon: "error",
                     title: "Intentalo de nuevo",
                     text: "No pasaste todos los casos de prueba!",
-                    footer: '<a href="#">Why do I have this issue?</a>'
                     });
             } else {
                 Swal.fire({
                     icon: "error",
                     title: "Oops... tienes un error",
                     text: "No pasaste todos los casos de prueba!",
-                    footer: '<a href="#">Why do I have this issue?</a>'
                     });
             }
         }

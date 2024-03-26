@@ -2,12 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
 import Logout from '../ButtonLogout/Logout';
+import { useScore } from '@/context/ScoreContext';
 
 type ProblemtopProps = {
     
 };
 
 const Problemtop:React.FC<ProblemtopProps> = () => {
+
+    const { score, setScore } = useScore();
     
     return <nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-light-blue text-light-blue-7 text-white border-1'>
     <div className={`flex w-full items-center justify-between max-w-[1200px] mx-auto`}>
@@ -29,6 +32,7 @@ const Problemtop:React.FC<ProblemtopProps> = () => {
             <Link href='/'>
                 <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Inicio</button>
             </Link>
+            <div className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Puntuación: { score } </div>
             <Logout/>
         </div>
     </div>

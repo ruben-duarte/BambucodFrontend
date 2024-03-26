@@ -1,0 +1,11 @@
+('two-sum', 'Two Sum', 'Fácil', 'Array', 'Utiliza un enfoque de hash table para mejorar la eficiencia.'),
+	('valid-parentheses', 'Valid Parentheses','Fácil','Stack', 'Utiliza un enfoque de hash table para mejorar la eficiencia.'),
+	('reverse-list', 'Reverse Linked List', 'Difícil', 'Linked List', 'Intenta utilizar iteración o recursión para invertir la lista.'),
+	('jump', 'Jump Game', 'Intermedio', 'Dynamic Programming', 'Prueba un enfoque greedy para encontrar la solución óptima.'),
+	('matrix', 'Search a 2D Matrix','Intermedio','Binary Search', 'Utiliza una pila para rastrear los paréntesis abiertos y cerrados.'),
+	('pointers', 'Container With Most Water','Intermedio','Two Pointers', 'Divide y conquista aplicando búsqueda binaria en filas y columnas.'),
+	('intervals', 'Merge Intervals','Intermedio','intervals','Intenta avanzar los punteros para maximizar el área formada por los bordes.'),
+	('tree', 'Maximum Depth of Binary Tree','Fácil','Tree','Ordena los intervalos y luego combina los solapados.'),
+	('arrays', 'Best Time to Buy and Sell Stock','Fácil','Array','Utiliza un enfoque de búsqueda en profundidad (DFS) para calcular la profundidad máxima.'),
+	('subset', 'Subsets','Intermedio','Backtracking','Prueba un enfoque greedy para encontrar el mayor beneficio posible.');
+	

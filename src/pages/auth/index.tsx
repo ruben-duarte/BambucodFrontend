@@ -16,7 +16,6 @@ export default function Home() {
                 className='text-2xl text-center text-gray-700 dark:text-gray-400 font-medium  mt-10 mb-5'>
                   Iniciemos la aventura 🎼 etude-1: Bambuco
               </h1>
-              
               <div className='relative overflow-x-auto mx-auto px-6 pb-10'>
               <table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto'>
                 <thead className='text-xs text-gray-700 uppercase dark:text-gray-400 border-b '>
