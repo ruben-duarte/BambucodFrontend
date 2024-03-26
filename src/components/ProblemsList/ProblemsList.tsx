@@ -33,10 +33,6 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
         
       },[]);
 
-      const redirectAuth = () => {
-        event.preventDefault()
-        console.log("click");
-      }
 
 
     return (
