@@ -1,6 +1,28 @@
-## Bambucod coding challenges app Fronted
+# Bambucod app made with nextjs and Springboot
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Group 04 collaborators:
+- Raquel Sofia Neira
+- Edwin Rojas
+- Ruben Duarte
+## Peaku cohort-11 project
+
+- 💻 Experience in HTML5, CSS3, tailwindCSS, React, SpringBoot, Postgresql 
+- 🎨 coding challenges app for Javascript
+
+
+
+https://github.com/ruben-duarte/BambucodFrontend/assets/107430911/cf5da03b-02dd-45e8-b547-129de1cb7a5a
+
+Check it out!
+
+
+
+https://github.com/ruben-duarte/BambucodFrontend/assets/107430911/d855c2a5-9c45-488b-a750-762589e01719
+
+
+
+
+
 
 ## Getting Started
 
