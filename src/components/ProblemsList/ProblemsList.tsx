@@ -6,13 +6,13 @@ import { useSession } from 'next-auth/react';
 
 
 type ProblemsListProps = {
-    
+ 
 };
 
 const ProblemsList:React.FC<ProblemsListProps> = () => {
     const { data:session, status } = useSession();
 
-    const [problems, setProblems] = useState([]);
+    const [problems, setProblems] :any= useState([]);
     
     useEffect(() => {
         const fetchGet = async () => {
@@ -37,7 +37,7 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
 
     return (
         <tbody className='text-white'>
-            {problems.map((problem, index) => {
+            {problems.map((problem:any, index:any) => {
                 const difficulyColor = 
                 problem.difficulty === "Fácil"
                 ? "text-dark-green-s"
