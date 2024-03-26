@@ -9,6 +9,38 @@
 - 💻 Experience in HTML5, CSS3, tailwindCSS, React, SpringBoot, Postgresql 
 - 🎨 coding challenges app for Javascript
 
+you can use this coding solutions, to test the first and second execercise:
+
+Two-sum
+```
+const hashTable = {};
+
+for(let i=0; i<nums.length; i++){
+	let value = target - nums[i]
+	if(!(value in hashTable)){
+		hashTable[nums[i]]=i
+	} else{
+		return [hashTable[value],i]
+	}
+}
+```
+valid-parentheses
+```
+while (
+          s.indexOf('()') !== -1 ||
+          s.indexOf('{}') !== -1 ||
+          s.indexOf('[]') !== -1
+      ) {
+
+          s = s
+              .replace('()', '')
+              .replace('{}', '')
+              .replace('[]', '');
+      }
+  
+      return !s.length;
+```
+
 
 
 https://github.com/ruben-duarte/BambucodFrontend/assets/107430911/cf5da03b-02dd-45e8-b547-129de1cb7a5a
