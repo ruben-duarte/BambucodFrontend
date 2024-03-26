@@ -1,5 +1,4 @@
 import React from 'react';
-import { problems } from '../problems/problems';
 import { BsCheckCircle } from 'react-icons/bs';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
@@ -16,11 +15,6 @@ const ProblemsList:React.FC<ProblemsListProps> = () => {
     const [problems, setProblems] = useState([]);
     
     useEffect(() => {
-        if(status === "authenticated"){
-            console.log("esta loggueado");
-        } else {
-            console.log("no esta logg");
-        }
         const fetchGet = async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/puzzle/list`, {
                 method: 'GET',

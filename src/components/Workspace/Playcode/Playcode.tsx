@@ -24,11 +24,10 @@ const Playcode:React.FC<PlaycodeProps> = ({ problem, setSuccess }) => {
     const { data:session, status } = useSession();
     const { score, setScore } = useScore();
     
-
-    const scoreValue = 500;
     const token = session?.accessToken;
     const emailUser = session?.user?.email;
-    
+    const scoreValue = 500;
+
     const apiUpdateScore = async () => {
         
         const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/set-score/${emailUser}`, {

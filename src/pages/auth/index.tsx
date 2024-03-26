@@ -1,12 +1,10 @@
 import Problemtop from "@/components/Problemtop/Problemtop";
 import ProblemsList from "@/components/ProblemsList/ProblemsList";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 
 
 
 export default function Home() {
-  const { data:session, status } = useSession();
+  
 
   return (
       <>
