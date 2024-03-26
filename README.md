@@ -9,7 +9,7 @@
 - 💻 Experience in HTML5, CSS3, tailwindCSS, React, SpringBoot, Postgresql 
 - 🎨 coding challenges app for Javascript
 
-you can use this coding solutions, to test the first and second execercise:
+you can use this coding solutions, to test the first and second execercises:
 
 Two-sum
 ```
