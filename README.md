@@ -11,19 +11,19 @@
 
 ## Getting Started
 
-# 1. Clone the repository and install dependencies
+## 1. Clone the repository and install dependencies
 ```
 git clone https://github.com/ruben-duarte/BambucodFrontend.git
 cd BambucodFrontend
 npm install
 ```
-# 2. Configure your local environment
+## 2. Configure your local environment
 - Copy the .env.local.example file in this directory to .env.local (which will be ignored by Git):
 ```
 .env.local
 ```
-# 3. Run your postgresql 
-# 4. Start the application
+## 3. Run your postgresql 
+## 4. Start the application
 ```
 npm run dev
 ```
