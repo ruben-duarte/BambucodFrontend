@@ -19,7 +19,7 @@ export default NextAuth({
           
           if (res.ok) {
             
-            return { ...credentials, token: response.message, email: response.email};
+            return { id: "", token: response.message, email: response.email };
           } else{
             throw new Error(response.message); 
           }
@@ -30,7 +30,7 @@ export default NextAuth({
       signIn: '/'
     },
     callbacks: {
-        jwt: async ({ token, user }) => {
+        jwt: async ({ token, user }:any) => {
             // Si el usuario se acaba de autenticar, tomar el token del objeto 'user'
             if (user) {
               token.accessToken = user.token;
@@ -39,7 +39,7 @@ export default NextAuth({
             
             return token;
           },          
-        session: async ({ session, token }) => {
+        session: async ({ session, token }:any) => {
           session.accessToken = token.accessToken;
           
           return session;

@@ -19,7 +19,7 @@ const SignUp:React.FC<SignUpProps> = () => {
         password: '',
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e:any) => {
 
       setRegisterData( {
           ...registerData,
@@ -28,7 +28,7 @@ const SignUp:React.FC<SignUpProps> = () => {
       };
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
         console.log(registerData)
 
