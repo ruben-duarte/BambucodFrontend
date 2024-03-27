@@ -64,6 +64,8 @@ Check it out!
 
 https://github.com/ruben-duarte/BambucodFrontend/assets/107430911/d855c2a5-9c45-488b-a750-762589e01719
 
+live demo
+https://bambucod-frontend.vercel.app/
 
 
 
